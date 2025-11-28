@@ -1,14 +1,15 @@
 <?php
 class DBConnect {
     public static function getPDO():PDO{
-$host = "localhost";
-$user = "root";
-$password = "";
+$host = "127.0.0.1";
+$user = "user";
+$password = "pass";
 $dbname = "Carnet";
+$port = 3307;
 
 try {
     $mysqlClient = new PDO(
-        "mysql:host=$host;dbname=$dbname;charset=utf8mb4",
+        "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4",
         $user,
         $password,
         [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
@@ -23,4 +24,4 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 $pdo = DBConnect::getPDO();
-var_dump($pdo);
+//var_dump($pdo);
