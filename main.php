@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . '/ContactManager.php');
+require_once(__DIR__ . '/Contact.php');
 $manager = new ContactManager();
 $contacts = $manager->findAll();
 while (true) {
