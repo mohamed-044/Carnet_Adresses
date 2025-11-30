@@ -28,7 +28,16 @@ while (true) {
          $result->getName() . ", " .
          $result->getEmail() . ", " .
          $result->getPhoneNumber() . "\n";
-    } else {
+    } 
+    }
+    else if (preg_match("/^delete (\d+)$/", $line, $matches)) {
+    $id = intval($matches[1]);
+    $delete = $manager->delete($id);
+    if ($delete) {
+        echo "Contact supprimé\n";
+        $contacts = $manager->findAll();
+    } 
+    else {
         echo "Aucun contact trouvé avec l'id $id\n";
     }
     }

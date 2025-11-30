@@ -23,4 +23,11 @@ class ContactManager {
         $data['phone_number']
     );   
     }
+    public function delete(int $id) : bool{
+    require_once(__DIR__ . '/DBConnect.php');     
+    $mysqlClient = DBConnect::getPDO();  
+    $contactsStatement = $mysqlClient->prepare('DELETE FROM Contact WHERE id = ?');
+    $contactsStatement->execute([$id]);
+    return $contactsStatement->rowCount() > 0;
+    }
 }
