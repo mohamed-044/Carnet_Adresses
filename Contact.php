@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . '/DBConnect.php');  
+
 class Contact{
     
     private int $id = 0;
@@ -7,20 +8,30 @@ class Contact{
     private string $email;
     private string $phone_number;
 
+    public function __construct(int $id, string $name, string $email, string $phone_number)
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->email = $email;
+        $this->phone_number = $phone_number;
+    }
+
     public function getId() : ?int {
- 
         return $this->id;
     }
-    function getName() : ?string {
-        
+    public function getName() : ?string {
+        return $this->name;
     }
-    function setName() : void {
+    public function getEmail(): ?string{
+        return $this->email; 
+    }
+    public function getPhoneNumber(): ?int{
+        return $this->phone_number;
+    }
+    public function setName(string $name) : void {
 
     } 
-    function toString() : ?string {
+    public function toString() : ?string {
 
     }
 }
-$c = new Contact;
-$c->getId();
-var_dump($c);
