@@ -55,6 +55,9 @@ while (true) {
         echo "Aucun contact trouvé avec l'id $id\n";
     }
     }
+    else if ($line === 'quit') {
+        exit();
+    }
     else {
         echo "Vous avez saisi : $line\n";
     }
