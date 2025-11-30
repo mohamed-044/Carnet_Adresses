@@ -7,4 +7,20 @@ class ContactManager {
     $contacts = $contactsStatement->fetchAll(PDO::FETCH_ASSOC);
     return $contacts;
     }   
+    public function findById(int $id) : ?Contact{
+    require_once(__DIR__ . '/DBConnect.php');     
+    $mysqlClient = DBConnect::getPDO();  
+    $contactsStatement = $mysqlClient->prepare('SELECT * FROM Contact WHERE id = ?');
+    $contactsStatement->execute([$id]);
+    $data = $contactsStatement->fetch(PDO::FETCH_ASSOC);
+    if (!$data) {
+        return null;
+    }
+    return new Contact(
+        intval($data['id']),
+        $data['name'],
+        $data['email'],
+        $data['phone_number']
+    );   
+    }
 }
