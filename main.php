@@ -41,6 +41,20 @@ while (true) {
         echo "Aucun contact trouvé avec l'id $id\n";
     }
     }
+    else if (preg_match("/^create (\d+),\s*([^,]+),\s*([^,]+),\s*(\S+)$/", $line, $matches)) {
+    $id = intval($matches[1]);
+    $name = trim($matches[2]);
+    $email = trim($matches[3]);
+    $phone_number = trim($matches[4]);
+    $create = $manager->create($id, $name, $email, $phone_number);
+    if ($create) {
+        echo "Contact créé\n";
+        $contacts = $manager->findAll();
+    } 
+    else {
+        echo "Aucun contact trouvé avec l'id $id\n";
+    }
+    }
     else {
         echo "Vous avez saisi : $line\n";
     }

@@ -30,4 +30,11 @@ class ContactManager {
     $contactsStatement->execute([$id]);
     return $contactsStatement->rowCount() > 0;
     }
+    public function create(int $id, string $name, string $email, string $phone_number) : bool{
+    require_once(__DIR__ . '/DBConnect.php');     
+    $mysqlClient = DBConnect::getPDO();  
+    $contactsStatement = $mysqlClient->prepare("INSERT INTO Contact (id, name, email, phone_number) VALUES (?, ?, ?, ?)");
+    $contactsStatement->execute([$id, $name, $email, $phone_number]);
+    return $contactsStatement->rowCount() > 0;
+    }
 }
