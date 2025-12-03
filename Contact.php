@@ -28,10 +28,4 @@ class Contact{
     public function getPhoneNumber(): ?int{
         return $this->phone_number;
     }
-    public function setName(string $name) : void {
-
-    } 
-    public function toString() : ?string {
-
-    }
 }
