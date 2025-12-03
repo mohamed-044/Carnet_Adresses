@@ -9,6 +9,7 @@ while (true) {
     if ($line === 'help') {
         echo "help : affiche cette aide\n";
         echo "list : liste des contacts\n";
+        echo "detail [id] : affiche le détail d'un contact\n";
         echo "create [name], [email], [phone number] : crée un contact\n";
         echo "delete [id] : supprime un contact\n";
         echo "quit : quitte le programme\n";
