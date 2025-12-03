@@ -1,7 +1,7 @@
 <?php
 class ContactManager {
 
-    private function getConnection() {
+    private static function getConnection() {
         require_once(__DIR__ . '/DBConnect.php');
         try {
             return DBConnect::getPDO();
@@ -10,8 +10,8 @@ class ContactManager {
         }
     }
 
-    public function findAll() : array {
-        $mysqlClient = $this->getConnection();
+    public static function findAll() : array {
+        $mysqlClient = self::getConnection();
 
         try {
             $stmt = $mysqlClient->query("SELECT * FROM Contact");
@@ -22,8 +22,8 @@ class ContactManager {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function findById(int $id) : ?Contact {
-        $mysqlClient = $this->getConnection();
+    public static function findById(int $id) : ?Contact {
+        $mysqlClient = self::getConnection();
 
         try {
             $stmt = $mysqlClient->prepare("SELECT * FROM Contact WHERE id = ?");
@@ -43,8 +43,8 @@ class ContactManager {
         );
     }
 
-    public function delete(int $id) : bool {
-        $mysqlClient = $this->getConnection();
+    public static function delete(int $id) : bool {
+        $mysqlClient = self::getConnection();
 
         try {
             $stmt = $mysqlClient->prepare("DELETE FROM Contact WHERE id = ?");
@@ -56,8 +56,8 @@ class ContactManager {
         return $stmt->rowCount() > 0;
     }
 
-    public function create(string $name, string $email, string $phone_number) : bool {
-        $mysqlClient = $this->getConnection();
+    public static function create(string $name, string $email, string $phone_number) : bool {
+        $mysqlClient = self::getConnection();
 
         try {
             $stmt = $mysqlClient->prepare(
