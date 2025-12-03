@@ -30,6 +30,9 @@ while (true) {
          $result->getEmail() . ", " .
          $result->getPhoneNumber() . "\n";
     } 
+    else {
+        echo "Aucun contact trouvé avec l'id $id\n";
+    }
     }
     else if (preg_match("/^delete (\d+)$/", $line, $matches)) {
     $id = intval($matches[1]);
@@ -39,7 +42,7 @@ while (true) {
         $contacts = $manager->findAll();
     } 
     else {
-        echo "Aucun contact trouvé avec l'id $id\n";
+        echo "Le contact n'a pas pu être supprimé\n";
     }
     }
     else if (preg_match("/^create \s*([^,]+),\s*([^,]+),\s*(\S+)$/", $line, $matches)) {
@@ -51,11 +54,14 @@ while (true) {
         echo "Contact créé\n";
         $contacts = $manager->findAll();
     } 
+    else {
+        echo "Le contact n'a pas pu être créé\n";
+    }
     }
     else if ($line === 'quit') {
         exit();
     }
     else {
-        echo "Vous avez saisi : $line\n";
+        echo "La commande '$line' est incorrect\n";
     }
 }
