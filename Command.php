@@ -12,12 +12,11 @@ Class Command {
     private $modify;
 
     public function list() {
-        $contact = new ContactManager; 
-        $contacts = $contact->findAll();
+        $contacts = ContactManager::findAll();
         echo "Liste des contacts : \nid, name, email, phone number\n";
         foreach ($contacts as $contact)
         {
-            echo "{$contact['id']}, {$contact['name']}, {$contact['email']}, {$contact['phone_number']}\n";
+            echo ("{$contact}\n");
         }
     }
     public function help() {
@@ -61,8 +60,6 @@ Class Command {
     public function delete(){
         if ($this->delete) {
             echo "Contact supprimé\n";
-            $manager = new ContactManager;
-            $contacts = $manager->findAll();
         } 
         else {
             echo "Le contact n'a pas pu être supprimé\n";
@@ -82,8 +79,6 @@ Class Command {
     public function create(){
         if ($this->create) {
             echo "Contact créé\n";
-            $manager = new ContactManager;
-            $contacts = $manager->findAll();
         } 
         else {
             echo "Le contact n'a pas pu être créé\n";
@@ -104,8 +99,8 @@ Class Command {
     public function modify(){
         if ($this->modify) {
             echo "Contact modifié\n";
-            $manager = new ContactManager;
-            $contacts = $manager->findAll();
+            $contact = ContactManager::findById($this->id);
+            echo ("{$contact}\n");
         } 
         else {
             echo "Le contact n'a pas pu être modifié\n";
