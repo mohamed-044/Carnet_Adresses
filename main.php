@@ -19,6 +19,9 @@ while (true) {
     else if ($command->createCheck($line)) {
         $command->create();
     }
+    else if ($command->modifyCheck($line)) {
+        $command->modify();
+    }
     else if ($line === 'quit') {
         exit();
     }
