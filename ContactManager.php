@@ -70,4 +70,19 @@ class ContactManager {
 
         return $stmt->rowCount() > 0;
     }
+
+    public static function modify(string $id, string $name, string $email, string $phone_number) : bool {
+        $mysqlClient = self::getConnection();
+
+        try {
+            $stmt = $mysqlClient->prepare(
+                "UPDATE Contact SET name=?, email=?, phone_number=? WHERE id=?"
+            );
+            $stmt->execute([$name, $email, $phone_number, $id]);
+        } catch (Exception $e) {
+            die("Erreur lors de la création : " . $e->getMessage());
+        }
+
+        return $stmt->rowCount() > 0;
+    }
 }
