@@ -11,15 +11,27 @@ class ContactManager {
     }
 
     public static function findAll() : array {
-        $mysqlClient = self::getConnection();
+    $mysqlClient = self::getConnection();
 
-        try {
-            $stmt = $mysqlClient->query("SELECT * FROM Contact");
-        } catch (Exception $e) {
-            die("Erreur lors de la récupération des contacts : " . $e->getMessage());
-        }
+    try {
+        $stmt = $mysqlClient->query("SELECT * FROM Contact");
+    } catch (Exception $e) {
+        die("Erreur lors de la récupération des contacts : " . $e->getMessage());
+    }
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $contacts = [];
+
+    foreach ($rows as $data) {
+        $contacts[] = new Contact(
+            (int)$data['id'],
+            $data['name'],
+            $data['email'],
+            $data['phone_number']
+        );
+    }
+
+    return $contacts;
     }
 
     public static function findById(int $id) : ?Contact {
