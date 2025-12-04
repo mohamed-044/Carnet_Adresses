@@ -3,7 +3,7 @@ require_once(__DIR__ . '/Command.php');
 $command = new Command;
 echo "Attention à la syntaxe des commandes, les espaces et les virgules sont importants.\n";
 while (true) {
-    $line = readline("Entrez votre commande (help, list, detail, create, delete, quit) : ");
+    $line = readline("Entrez votre commande (help, list, detail, create, delete, modify, quit) : ");
     if ($line === 'help') {
         $command->help();
     }
