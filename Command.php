@@ -9,6 +9,7 @@ Class Command {
     private $email;
     private $phone_number;
     private $create;
+    private $modify;
 
     public function list() {
         $contact = new ContactManager; 
@@ -25,6 +26,7 @@ Class Command {
         echo "detail [id] : affiche le détail d'un contact\n";
         echo "create [name], [email], [phone number] : crée un contact\n";
         echo "delete [id] : supprime un contact\n";
+        echo "modify [id], [name], [email], [phone number] : modifie un contact\n";
         echo "quit : quitte le programme\n";
     }
     public function detailCheck($line){
@@ -85,6 +87,28 @@ Class Command {
         } 
         else {
             echo "Le contact n'a pas pu être créé\n";
+        }
+    }
+    public function modifyCheck($line){
+        if (preg_match("/^modify (\d+),\s*([^,]+),\s*([^,]+),\s*(\S+)$/", $line, $matches)) {
+        $this->id = intval($matches[1]);
+        $this->name = trim($matches[2]);
+        $this->email = trim($matches[3]);
+        $this->phone_number = trim($matches[4]);
+        $manager = new ContactManager;
+        $this->modify = $manager->modify($this->id, $this->name, $this->email, $this->phone_number);
+        return true;
+    }
+    return false;
+    }
+    public function modify(){
+        if ($this->modify) {
+            echo "Contact modifié\n";
+            $manager = new ContactManager;
+            $contacts = $manager->findAll();
+        } 
+        else {
+            echo "Le contact n'a pas pu être modifié\n";
         }
     }
 }
