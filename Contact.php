@@ -28,4 +28,13 @@ class Contact{
     public function getPhoneNumber(): ?int{
         return $this->phone_number;
     }
+    public function __toString() :string{
+        return sprintf(
+        "%d, %s, %s, %s",
+        $this->id,
+        $this->name,
+        $this->email,
+        $this->phone_number
+    );
+    }
 }
